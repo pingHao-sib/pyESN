@@ -108,6 +108,10 @@ class ESN():
         self.W_feedb = self.random_state_.rand(
             self.n_reservoir, self.n_outputs) * 2 - 1
 
+#        print(self.W)
+#        print(self.W.shape)
+#        print(self.W_in.shape)
+
     def _update(self, state, input_pattern, output_pattern):
         """performs one update step.
 
@@ -189,7 +193,7 @@ class ESN():
         # include the raw inputs:
         extended_states = np.hstack((states, inputs_scaled))
         # Solve for W_out:
-        self.W_out = np.dot(np.linalg.pinv(extended_states[transient:, :]),
+        self.W_out = np.dot(np.linalg.pinv(extended_states[transient:, :]), #求伪逆
                             self.inverse_out_activation(teachers_scaled[transient:, :])).T
 
         # remember the last state for later:
